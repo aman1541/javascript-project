@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aman Kumar's Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f6fa;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #4e54c8, #8f94fb);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
+    }
+    section:hover {
+      transform: translateY(-5px);
+    }
+    h2 {
+      margin-top: 0;
+      color: #4e54c8;
+    }
+    button {
+      background: #4e54c8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px 0;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background: #6f74f9;
+      transform: scale(1.05);
+    }
+    input, textarea {
+      padding: 8px;
+      width: 100%;
+      margin: 5px 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .dark-mode {
+      background-color: #1c1c1c;
+      color: #f5f5f5;
+    }
+    #slider-image {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    #slider-image:hover {
+      transform: scale(1.03);
+    }
+    p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aman Kumar javascript project AIML10</h1>
+  </header>
+
+  <section id="click-counter">
+    <h2>1. Click Counter</h2>
+    <p>Count: <span id="count">0</span></p>
+    <button onclick="incrementCounter()">Click me</button>
+  </section>
+
+  <section id="color-changer">
+    <h2>2. Color Changer</h2>
+    <button onclick="changeBackgroundColor()">Change Color</button>
+  </section>
+
+  <section id="form-validation">
+    <h2>3. Simple Form Validation</h2>
+    <form onsubmit="return validateForm()">
+      Name: <input type="text" id="name" />
+      Email: <input type="text" id="email" />
+      <button type="submit">Submit</button>
+      <p id="form-error" style="color: red;"></p>
+    </form>
+  </section>
+
+  <section id="calculator">
+    <h2>4. Basic Calculator</h2>
+    <input id="num1" type="number" placeholder="Number 1" />
+    <input id="num2" type="number" placeholder="Number 2" />
+    <p id="calc-result"></p>
+    <button onclick="calculate('+')">Add</button>
+    <button onclick="calculate('-')">Subtract</button>
+    <button onclick="calculate('*')">Multiply</button>
+    <button onclick="calculate('/')">Divide</button>
+  </section>
+
+  <section id="clock">
+    <h2>5. Digital Clock</h2>
+    <p id="clock-time" style="font-size: 1.5rem; font-weight: bold;"></p>
+  </section>
+
+  <section id="dark-mode">
+    <h2>6. Toggle Light/Dark Mode</h2>
+    <button onclick="toggleDarkMode()">Toggle Mode</button>
+  </section>
+
+  <section id="quote-generator">
+    <h2>7. Random Quote Generator</h2>
+    <p id="quote" style="font-style: italic;"></p>
+    <button onclick="generateQuote()">New Quote</button>
+  </section>
+
+  <section id="image-slider">
+    <h2>8. Image Slider</h2>
+    <div style="text-align:center;">
+      <img id="slider-image" src="" width="300" height="200" />
+      <div style="margin-top:10px;">
+        <button onclick="prevImage()">Previous</button>
+        <button onclick="nextImage()">Next</button>
+      </div>
+      <p>Image <span id="image-index">1</span> of <span id="image-total">3</span></p>
+    </div>
+  </section>
+
+  <section id="bmi-calculator">
+    <h2>9. BMI Calculator</h2>
+    Weight (kg): <input type="number" id="weight" />
+    Height (m): <input type="number" id="height" />
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmi-result"></p>
+  </section>
+
+  <section id="word-counter">
+    <h2>10. Word Counter</h2>
+    <textarea id="text" rows="4" cols="50" oninput="countWords()" placeholder="Start typing..."></textarea>
+    <p>Word Count: <span id="word-count">0</span></p>
+  </section>
+
+  <script>
+    // Click Counter
+    let count = 0;
+    function incrementCounter() {
+      count++;
+      document.getElementById("count").textContent = count;
+    }
+
+    // Color Changer
+    function changeBackgroundColor() {
+      const colors = ["#FF6347", "#6A5ACD", "#20B2AA", "#FFD700","pink","black","green"];
+      document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // Form Validation
+    function validateForm() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const error = document.getElementById("form-error");
+    
+      if (!name || !email.includes("@")) {
+        error.textContent = "Please enter a valid name and email.";
+        return false;
+      }
+    
+      // Save to localStorage
+      localStorage.setItem("userName", name);
+      localStorage.setItem("userEmail", email);
+    
+      error.textContent = "";
+      alert("Form submitted and data saved to localStorage!");
+      return true;
+    }
+    
+
+    // Basic Calculator
+    function calculate(op) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      let result;
+      switch (op) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero'; break;
+      }
+      document.getElementById("calc-result").textContent = `Result: ${result}`;
+    }
+
+    // Digital Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock-time").textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Toggle Dark Mode
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Random Quote Generator
+    const quotes = [
+      "The best way to get started is to quit talking and begin doing.",
+      "Don’t let yesterday take up too much of today.",
+      "It’s not whether you get knocked down, it’s whether you get up.",
+      "If you are working on something exciting, it will keep you motivated."
+    ];
+    function generateQuote() {
+      const random = Math.floor(Math.random() * quotes.length);
+      document.getElementById("quote").textContent = quotes[random];
+    }
+    generateQuote();
+
+    // Image Slider
+    const images = [
+      "https://images.pexels.com/photos/932261/pexels-photo-932261.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/437716/pexels-photo-437716.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3876635/pexels-photo-3876635.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ];
+    let index = 0;
+    function showImage() {
+      const img = document.getElementById("slider-image");
+      const idxDisplay = document.getElementById("image-index");
+      const total = document.getElementById("image-total");
+
+      img.src = images[index];
+      idxDisplay.textContent = index + 1;
+      total.textContent = images.length;
+    }
+    function nextImage() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+    function prevImage() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+    window.addEventListener("load", showImage);
+
+    // BMI Calculator
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById("weight").value);
+      const height = parseFloat(document.getElementById("height").value);
+      if (!weight || !height || height <= 0) return;
+      const bmi = weight / (height * height);
+      let category = "";
+      if (bmi < 18.5) category = "Underweight";
+      else if (bmi < 24.9) category = "Normal";
+      else if (bmi < 29.9) category = "Overweight";
+      else category = "Obese";
+      document.getElementById("bmi-result").textContent = `BMI: ${bmi.toFixed(2)} (${category})`;
+    }
+
+    // Word Counter
+    function countWords() {
+      const text = document.getElementById("text").value.trim();
+      const words = text.split(/\s+/).filter(Boolean);
+      document.getElementById("word-count").textContent = words.length;
+    }
+  </script>
+</body>
+</html>
